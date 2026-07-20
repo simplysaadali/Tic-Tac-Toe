@@ -5,8 +5,8 @@
 
 body{
     text-align: center;
-    background-color: #6F1D1B;
-    color: #ECF39E;
+    background-color: #240B36;
+    color: #1A1B25;
 }
 
 .container{
@@ -32,16 +32,16 @@ body{
     width: 18vmin;
     height: 18vmin;
     border-radius: 20px;
-    box-shadow: 0 0 5px #432818;
+    box-shadow: 0 0 5px #F2A359;
     border: none;
     font-size: 38px;
-    background-color: #BB9457;
-    color: white;
+    background-color:#F2DC5D;
+    color: #1A1B25;
 }
 
 .btn:hover{
-    box-shadow: 0 0 10px #90A955;
-    transform: translateY(-3px);
+    box-shadow: 0 0 12px #AA6373;
+    transform: translateY(-2px);
 }
 
 h1{
@@ -52,7 +52,7 @@ h1{
 }
 
 .reset-btn{
-    background-color: black;
+    background-color: #A4031F;
     width: 170px;
     height: 60px;
     border-radius: 50px;
@@ -64,5 +64,32 @@ h1{
 
 .reset-btn:hover{
     /* transform: translateY(-3px); */
-    box-shadow: 3px 1px 5px white;
+    box-shadow: 3px 1px 5px #F2DC5D;
+}
+
+.new-btn{
+    background-color: #A4031F;
+    width: 170px;
+    height: 60px;
+    border-radius: 50px;
+    border: none;
+    font-size: 20px;
+    /* box-shadow: 0 0 2px white; */
+    color: white;
+    margin-bottom: 80px;
+    margin-top: 20px;
+
+}
+
+#msg{
+    padding-top: 15px;
+    color: white;
+    font-size: 40px;
+}
+
+.hide{
+    display: none;
+}
+.msg-container{
+    padding-top: 200px;
 }
