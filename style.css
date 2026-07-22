@@ -684,7 +684,6 @@ main {
     display: none;
 }
 
-/* ----- WIN OVERLAY ----- */
 .win-overlay {
     position: fixed;
     inset: 0;
@@ -776,7 +775,6 @@ main {
     transform: translateY(-1px) scale(1.02);
 }
 
-/* respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

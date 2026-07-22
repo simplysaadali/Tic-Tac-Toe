@@ -17,7 +17,6 @@
     const historyList = document.getElementById('historyList');
     const historyEmpty = document.getElementById('historyEmpty');
 
-    // ----- mark templates (drawn with stroke animation) -----
     function xMarkSvg() {
         return `<svg viewBox="0 0 24 24" class="mark-svg">
                 <line class="mark-path" pathLength="1" x1="18" y1="6" x2="6" y2="18"/>
@@ -34,7 +33,6 @@
     const oIconStatic = `<svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9"/></svg>`;
     const drawIconStatic = `<svg viewBox="0 0 24 24" stroke="#f2dc5d"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>`;
 
-    // ----- state -----
     let boardState = Array(9).fill(null);
     let turn = 'X';
     let gameActive = false;
@@ -46,7 +44,6 @@
     let history = [];
     let gameNumber = 0;
 
-    // ----- win patterns -----
     const winPatterns = [
         [0, 1, 2],
         [3, 4, 5],
@@ -58,7 +55,6 @@
         [2, 4, 6]
     ];
 
-    // ----- render board -----
     function renderBoard() {
         board.innerHTML = '';
         winLineSvg.innerHTML = '';
@@ -105,7 +101,6 @@
         el.classList.add('bump');
     }
 
-    // ----- match history -----
     function logHistory(winner) {
         gameNumber++;
         const movesTaken = boardState.filter(v => v !== null).length;
@@ -150,7 +145,6 @@
         scoreOEl.textContent = scoreO;
     }
 
-    // ----- check win / draw (works on any board array, defaults to live board) -----
     function checkWinner(bd = boardState) {
         for (const pattern of winPatterns) {
             const [a, b, c] = pattern;
@@ -162,8 +156,6 @@
     }
 
     function isBoardFull(bd = boardState) { return bd.every(v => v !== null); }
-
-    // ----- winning line overlay -----
     function drawWinLine(pattern, winner) {
         const cellCenter = (idx) => ({ x: (idx % 3) + 0.5, y: Math.floor(idx / 3) + 0.5 });
         const p1 = cellCenter(pattern[0]);
@@ -176,7 +168,6 @@
         requestAnimationFrame(() => requestAnimationFrame(() => lineEl.classList.add('drawn')));
     }
 
-    // ----- end game -----
     function endGame(winner) {
         gameActive = false;
         botThinking = false;
@@ -207,11 +198,10 @@
         setTimeout(() => winOverlay.classList.add('show'), winner ? 450 : 120);
     }
 
-    // ----- handle cell click -----
     function handleCellClick(idx) {
         if (!gameActive || botThinking) return;
         if (boardState[idx] !== null) return;
-        if (turn !== 'X') return; // human is always X
+        if (turn !== 'X') return;
 
         makeMove(idx, 'X');
         if (gameActive && mode === 'bot' && turn === 'O') {
@@ -222,7 +212,6 @@
         }
     }
 
-    // ----- make a move -----
     function makeMove(idx, player) {
         boardState[idx] = player;
         const cell = document.querySelector(`.cell[data-index="${idx}"]`);
@@ -243,7 +232,6 @@
         gameActive = true;
     }
 
-    // ----- bot brain (minimax: bot 'O' maximizes, human 'X' minimizes) -----
     function minimax(bd, depth, isBotTurn) {
         const result = checkWinner(bd);
         if (result) return result.winner === 'O' ? 10 - depth : depth - 10;
@@ -287,7 +275,6 @@
         return candidates[Math.floor(Math.random() * candidates.length)];
     }
 
-    // ----- bot move -----
     function botMove() {
         botTimeout = null;
         botThinking = false;
@@ -296,7 +283,6 @@
         makeMove(idx, 'O');
     }
 
-    // ----- reset game -----
     function resetGame() {
         if (botTimeout) { clearTimeout(botTimeout);
             botTimeout = null; }
@@ -308,7 +294,6 @@
         renderBoard();
     }
 
-    // ----- start game -----
     function startGame() {
         scoreX = 0;
         scoreO = 0;
@@ -317,12 +302,10 @@
         resetGame();
     }
 
-    // ----- event listeners -----
     modeBot.addEventListener('click', startGame);
     winNewBtn.addEventListener('click', resetGame);
     resetBtn.addEventListener('click', resetGame);
 
-    // init
     renderBoard();
     document.querySelectorAll('.cell').forEach(c => c.disabled = true);
     gameActive = false;
