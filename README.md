@@ -1,124 +1,66 @@
-# Tic Tac Toe · vs Unbeatable Bot
+# Tic Tac Toe
 
-A modern, visually polished Tic Tac Toe game where you face an unbeatable AI opponent powered by the Minimax algorithm. The game features a clean UI with SVG icons, real-time scoring, and smooth animations.
-
-
-## Why This Game?
-
-This project was created to demonstrate:
-
-1.  **Unbeatable AI** – The bot uses the Minimax algorithm to make optimal moves, ensuring it never loses. This provides a challenging experience for players who want to test their skills against a perfect opponent.
-
-2.  **Clean Visual Design** – Instead of using emojis or text characters, the game uses SVG icons for the 'X' and 'O' symbols. This gives the game a professional, scalable, and crisp appearance on any screen size.
-
-3.  **Smooth User Experience** – The game includes subtle animations, hover effects, and a polished overlay for game-over states, making the experience feel responsive and engaging.
-
-4.  **Educational Value** – The Minimax implementation serves as a great example of how game AI works, making this project useful for learning about recursive algorithms and decision trees.
-
+A simple, local two-player Tic Tac Toe game built with vanilla HTML, CSS, and JavaScript. Two players take turns clicking cells on a 3×3 grid on the same screen — no bot, no backend, just a lightweight browser game.
 
 ## Features
 
-### Unbeatable Bot
-- The bot uses the Minimax algorithm with depth evaluation.
-- It always makes the optimal move – either blocking your win or creating its own.
-- You can never win – the best outcome is a draw.
-
-### Modern UI
-- SVG-based X and O icons – no emojis or text characters.
-- Gradient backgrounds and glassmorphism effects.
-- Smooth animations on moves and game-over overlay.
-- Responsive design – works on both desktop and mobile devices.
-
-### Score Tracking
-- Keeps track of wins for both You (X) and Bot (O).
-- Scores persist across multiple games until you reset.
-
-### Game Controls
-- Reset Game – clears the board and resets scores.
-- New Game – starts a fresh match without resetting scores.
-
-### Turn Indicator
-- Shows whose turn it is with a dynamic SVG icon.
-- Clear visual feedback for the current player.
-
-### Game Over Overlay
-- Displays the winner (You, Bot, or Draw) with an animated pop-up.
-- Includes a "New Game" button for quick restart.
-
-
+- **3×3 clickable grid** – 9 buttons laid out with CSS flexbox.
+- **Two-player, same-device play** – players alternate turns; the game automatically switches between `0` and `X` after each move (X plays first).
+- **Win detection** – checks all 8 possible winning lines (3 rows, 3 columns, 2 diagonals) after every move.
+- **Draw detection** – if all 9 cells are filled with no winner, the game announces a draw.
+- **Win/draw overlay** – a message box appears announcing the winner (or a draw) and disables the board.
+- **Reset / New Game controls** – a "Reset Game!" button and a "New Game" button (shown on the overlay) both clear the board and let you start over.
 
 ## How to Play
 
-1.  Start the game – You are always X and go first.
-2.  Click any empty cell to place your 'X'.
-3.  Watch the bot – After a short delay, the bot (O) will make its move.
-4.  Continue playing until someone wins or the board fills (draw).
-5.  Use the buttons:
-    - Reset Game – starts a completely new game and resets scores.
-    - New Game (on overlay) – starts a new round without resetting scores.
+1. Open `index.html` in a browser.
+2. Player 1 clicks a cell to place `0`.
+3. Player 2 clicks a cell to place `X`.
+4. Turns keep alternating until either:
+   - a player lines up 3 of their symbol in a row, column, or diagonal (win), or
+   - all 9 cells are filled with no winner (draw).
+5. Click **Reset Game!** or **New Game** to start again.
 
+## Project Structure
 
-## How the Bot Works (Minimax Algorithm)
+```
+.
+├── index.html   # Page structure — the 3×3 button grid, win/draw message box, reset/new game buttons
+├── style.css    # Styling — dark purple background, yellow grid buttons, red action buttons
+└── script.js    # Game logic — turn switching, win checking, draw checking, reset handling
+```
 
-The bot uses the Minimax algorithm with depth scoring to evaluate every possible move:
+## How It Works
 
-- Maximizing player – Bot (O) tries to maximize its score.
-- Minimizing player – You (X) tries to minimize the bot's score.
-- Scoring:
-  - +10 - depth – Bot wins.
-  - -10 + depth – You wins.
-  - 0 – Draw.
-- The bot recursively explores all possible game states and chooses the move with the highest score.
-
-This ensures the bot never loses – it will either win or force a draw.
-
-
+- `script.js` keeps a `turn0` boolean to track whose turn it is, toggling between `0` and `X` on every click.
+- Each click writes the current symbol into the button's text and disables that button so it can't be clicked again.
+- After every move, `checkWinner()` loops through 8 hardcoded winning patterns (index combinations on the 3×3 grid) and compares the three cells in each pattern.
+- If all 9 cells are filled (`count === 9`) and no winner was found, the game reports a draw.
+- Resetting re-enables every button, clears their text, hides the message box, and resets the turn counter.
 
 ## Technologies Used
 
-- HTML5 – Structure of the game.
-- CSS3 – Styling, animations, and responsive design.
-- JavaScript (ES6) – Game logic, Minimax algorithm, and DOM manipulation.
-- SVG – Vector graphics for X, O, and UI elements.
+- HTML5
+- CSS3 (flexbox layout, hover effects)
+- Vanilla JavaScript (DOM manipulation, no frameworks or libraries)
 
----
+## Running Locally
 
-## Responsive Design
+No build step or dependencies required — just clone the repo and open `index.html` in any browser:
 
-The game is fully responsive and works on:
-- Desktop browsers
-- Tablets
-- Mobile devices
+```bash
+git clone https://github.com/simplysaadali/Tic-Tac-Toe.git
+cd Tic-Tac-Toe
+open index.html   # or double-click the file
+```
 
-The board size adapts to different screen sizes using vmin units and media queries.
+## Possible Improvements
 
----
-
-## Why No Friend Mode?
-
-The game focuses entirely on single-player vs AI to showcase the power of the Minimax algorithm. Removing the friend mode keeps the experience focused and challenging.
-
----
-
-## Future Improvements
-
-- Difficulty levels – Add easy, medium, and hard modes.
-- Sound effects – Add audio feedback for moves and wins.
-- Animations – Add more elaborate animations for winning lines.
-- Online multiplayer – Play against friends over the internet.
-
----
-
-## Credits
-
-Designed and developed as a demonstration of game AI and modern web design principles.
-
----
+- Score tracking across rounds
+- A single-player mode against a bot (e.g. minimax)
+- Highlighting the winning line
+- Sound effects / animations
 
 ## License
 
-This project is open-source and available for learning and modification.
-
----
-
-Enjoy the challenge!
+No license file is currently included in this repository.
